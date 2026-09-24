@@ -1,12 +1,12 @@
 'use client';
 
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import {
   motion,
   useInView,
-  useAnimation,
   AnimatePresence,
   useReducedMotion,
+  type Variants,
 } from 'framer-motion';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -14,41 +14,27 @@ type FeedbackState = { type: 'success' | 'error'; message: string } | null;
 type FormErrors = Partial<Record<'nama' | 'email' | 'kategori_karya' | 'deskripsi', string>>;
 
 // ─── Animation Variants ───────────────────────────────────────────────────────
-const fadeUp = {
-  hidden:  { opacity: 0, y: 24 },
+const fadeUp: Variants = {
+  hidden: { opacity: 0, y: 24 },
   visible: (delay: number = 0) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, delay, ease: [0.16, 1, 0.3, 1] },
-  }),
-};
-
-const fadeIn = {
-  hidden:  { opacity: 0 },
-  visible: (delay: number = 0) => ({
-    opacity: 1,
-    transition: { duration: 0.5, delay, ease: 'easeOut' },
-  }),
-};
-
-const heroText = {
-  hidden:  { opacity: 0, y: 20 },
-  visible: (delay: number = 0) => ({
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.8, delay, ease: [0.16, 1, 0.3, 1] },
+    transition: { duration: 0.6, delay, ease: [0.16, 1, 0.3, 1] as const },
   }),
 };
 
 // ─── Counter Hook (requestAnimationFrame) ─────────────────────────────────────
 function useCounter(target: number, duration: number = 1500, shouldStart: boolean = false) {
-  const [count, setCount] = useState(0);
-  const rafRef = useRef<number>(0);
   const shouldReduce = useReducedMotion();
+  const [count, setCount] = useState(() => (shouldReduce ? target : 0));
+  const rafRef = useRef<number>(0);
 
   useEffect(() => {
     if (!shouldStart) return;
-    if (shouldReduce) { setCount(target); return; }
+    if (shouldReduce) {
+      const id = requestAnimationFrame(() => setCount(target));
+      return () => cancelAnimationFrame(id);
+    }
 
     const start = performance.now();
     const step = (now: number) => {
@@ -57,8 +43,11 @@ function useCounter(target: number, duration: number = 1500, shouldStart: boolea
       // ease-out: decelerate near end
       const eased = 1 - Math.pow(1 - progress, 3);
       setCount(Math.floor(eased * target));
-      if (progress < 1) rafRef.current = requestAnimationFrame(step);
-      else setCount(target);
+      if (progress < 1) {
+        rafRef.current = requestAnimationFrame(step);
+      } else {
+        setCount(target);
+      }
     };
     rafRef.current = requestAnimationFrame(step);
     return () => cancelAnimationFrame(rafRef.current);
@@ -254,8 +243,9 @@ export default function HomePage() {
       setForm({ nama: '', email: '', kategori_karya: '', deskripsi: '', portofolio: '' });
       setErrors({});
       setToast(true);
-    } catch (err: any) {
-      setFeedback({ type: 'error', message: err.message || 'Gagal terhubung ke server.' });
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : 'Gagal terhubung ke server.';
+      setFeedback({ type: 'error', message });
     } finally {
       setLoading(false);
     }

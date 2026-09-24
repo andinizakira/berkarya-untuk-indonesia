@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
+import Link from 'next/link';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -98,16 +99,18 @@ function useCounter(target: number, duration = 800, go = false) {
   useEffect(() => {
     if (!go) return;
     if (reduced) {
-      setVal(target);
-      prevVal.current = target;
-      return;
+      const id = requestAnimationFrame(() => {
+        setVal(target);
+        prevVal.current = target;
+      });
+      return () => cancelAnimationFrame(id);
     }
 
     const startVal = prevVal.current;
     const diff = target - startVal;
     if (diff === 0) {
-      setVal(target);
-      return;
+      const id = requestAnimationFrame(() => setVal(target));
+      return () => cancelAnimationFrame(id);
     }
 
     const startTime = performance.now();
@@ -209,7 +212,12 @@ export default function AdminPage() {
   const reduced = useReducedMotion();
 
   // Auth
-  const [token, setToken]           = useState<string | null>(null);
+  const [token, setToken]           = useState<string | null>(() => {
+    if (typeof window !== 'undefined') {
+      return sessionStorage.getItem('admin_token');
+    }
+    return null;
+  });
   const [password, setPassword]     = useState('');
   const [loginError, setLoginError] = useState('');
   const [loginLoading, setLoginLoading] = useState(false);
@@ -252,10 +260,6 @@ export default function AdminPage() {
   const removeToast = (id: number) => setToasts(p => p.filter(t => t.id !== id));
 
   // ─── Auth ──────────────────────────────────────────────────────────────────
-  useEffect(() => {
-    const saved = sessionStorage.getItem('admin_token');
-    if (saved) setToken(saved);
-  }, []);
 
   const handleLogout = () => {
     sessionStorage.removeItem('admin_token');
@@ -278,8 +282,9 @@ export default function AdminPage() {
       if (!res.ok) throw new Error(data.message || 'Login gagal.');
       sessionStorage.setItem('admin_token', data.token);
       setToken(data.token);
-    } catch (err: any) {
-      setLoginError(err.message || 'Login gagal. Periksa password Anda.');
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : 'Login gagal. Periksa password Anda.';
+      setLoginError(message);
     } finally {
       setLoginLoading(false);
     }
@@ -307,7 +312,12 @@ export default function AdminPage() {
   }, []);
 
   useEffect(() => {
-    if (token) fetchIdeas(token);
+    if (token) {
+      const timer = setTimeout(() => {
+        fetchIdeas(token);
+      }, 0);
+      return () => clearTimeout(timer);
+    }
   }, [token, fetchIdeas]);
 
   // ─── Stats ──────────────────────────────────────────────────────────────────
@@ -345,7 +355,8 @@ export default function AdminPage() {
   const paginated  = filtered.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
 
   useEffect(() => {
-    setPage(1);
+    const id = requestAnimationFrame(() => setPage(1));
+    return () => cancelAnimationFrame(id);
   }, [filterStatus, search, sortDir]);
 
   // ─── Bulk Actions ──────────────────────────────────────────────────────────
@@ -518,9 +529,9 @@ export default function AdminPage() {
           </form>
 
           <p className="mt-6 text-center">
-            <a href="/" className="text-xs text-slate-400 hover:text-white transition-colors">
+            <Link href="/" className="text-xs text-slate-400 hover:text-white transition-colors">
               ← Kembali ke Halaman Utama
-            </a>
+            </Link>
           </p>
         </motion.div>
       </div>
@@ -718,7 +729,7 @@ export default function AdminPage() {
                 <div className="flex items-center gap-2 flex-wrap">
                   <select
                     value={bulkAction}
-                    onChange={e => setBulkAction(e.target.value as any)}
+                    onChange={e => setBulkAction(e.target.value as Status | 'delete' | '')}
                     className="px-3 py-1.5 text-xs font-semibold bg-white/10 border border-white/20 text-white focus:outline-none cursor-pointer rounded-sm"
                   >
                     <option value="" className="text-slate-800">Pilih Aksi Massal</option>
@@ -857,7 +868,7 @@ export default function AdminPage() {
                             key={idea.id}
                             initial={reduced ? false : { opacity: 0, y: 8 }}
                             animate={{ opacity: 1, y: 0 }}
-                            exit={reduced ? false : { opacity: 0, y: -8 }}
+                            exit={reduced ? undefined : { opacity: 0, y: -8 }}
                             transition={{
                               duration: 0.25,
                               delay: Math.min(idx * 0.03, 0.15),

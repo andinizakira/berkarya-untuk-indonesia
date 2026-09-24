@@ -102,13 +102,13 @@ npm run dev
 
 ## 📡 Dokumentasi Endpoint API
 
-| Method | Endpoint | Deskripsi |
-| :--- | :--- | :--- |
-| `GET` | `/api/ideas` | Mengambil seluruh daftar ide yang tersimpan |
-| `POST` | `/api/ideas` | Mengirim data ide baru dari formulir publik |
-| `PUT` | `/api/ideas/{id}/status` | Memperbarui status moderasi ide (`approved` / `rejected` / `pending`) |
-| `DELETE` | `/api/ideas/{id}` | Menghapus ide dari daftar database |
-| `POST` | `/api/admin/login` | Memverifikasi kredensial login admin |
+| Method | Endpoint | Auth | Deskripsi |
+| :--- | :--- | :--- | :--- |
+| `POST` | `/api/ideas` | Publik | Mengirim gagasan/ide baru dari formulir publik |
+| `POST` | `/api/admin/login` | Publik | Verifikasi kredensial login admin |
+| `GET` | `/api/admin/ideas` | Bearer Token | Mengambil daftar seluruh ide masuk (opsional query `?status=...`) |
+| `PATCH` | `/api/admin/ideas/{id}` | Bearer Token | Memperbarui status ide (`menunggu` / `diproses` / `diterima` / `ditolak`) & catatan |
+| `DELETE` | `/api/admin/ideas/{id}` | Bearer Token | Menghapus ide dari daftar penyimpanan |
 
 ---
 
