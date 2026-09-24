@@ -130,7 +130,8 @@ take-home-1x24jam/
 - **Nama:** Andini Zakira
 - **Program:** Mahreen Indonesia Internship Batch 2
 - **Posisi:** Web Development Frontend & Backend
-- **Tahun:** 2024 / 2025
+- **Tahun:** 2026
+-  / 2027
 
 ---
 <div align="center">
