@@ -1,0 +1,86 @@
+[
+    {
+        "id": "idea_001",
+        "nama": "Andini Zakira",
+        "email": "andini.zakira@gmail.com",
+        "kategori_karya": "teknologi",
+        "deskripsi": "Platform AI deteksi dini hama tanaman padi berbasis foto kamera smartphone untuk membantu petani di desa meningkatkan hasil panen dan mengurangi ketergantungan pestisida berlebih.",
+        "portofolio": "https:\/\/github.com\/andinizakira\/agri-ai-detector",
+        "status": "diproses",
+        "catatan": "Sedang ditinjau oleh tim teknis.",
+        "submitted_at": "2026-09-23T06:56:52+07:00",
+        "updated_at": "2026-09-23T07:32:15+00:00"
+    },
+    {
+        "id": "idea_002",
+        "nama": "Budi Pratama",
+        "email": "budi.pratama@edu.id",
+        "kategori_karya": "pendidikan",
+        "deskripsi": "Aplikasi bimbingan belajar gratis interaktif berbasis modul ringkas offline dan bot WhatsApp otomatis untuk siswa sekolah dasar di wilayah 3T tanpa jaringan internet stabil.",
+        "portofolio": "https:\/\/budipratama.dev\/belajar-3t",
+        "status": "diproses",
+        "catatan": "Perlu divalidasi dengan dinas pendidikan daerah sasaran terlebih dahulu.",
+        "submitted_at": "2026-09-22T14:30:10+07:00",
+        "updated_at": "2026-09-23T08:15:00+07:00"
+    },
+    {
+        "id": "idea_003",
+        "nama": "Siti Rahmawati",
+        "email": "siti.rahma@wastra.org",
+        "kategori_karya": "seni & budaya",
+        "deskripsi": "Platform katalog dan pasar digital untuk menghubungkan kelompok penenun tradisional Flores dan Sumba secara langsung ke desainer muda dan pasar ekspor dengan transparansi royalti.",
+        "portofolio": "https:\/\/instagram.com\/tenunflores_lestari",
+        "status": "diterima",
+        "catatan": "Sangat sejalan dengan pilar ekonomi kreatif. Siap masuk tahap kurasi inkubasi batch 3.",
+        "submitted_at": "2026-09-21T09:12:45+07:00",
+        "updated_at": "2026-09-22T16:00:00+07:00"
+    },
+    {
+        "id": "idea_004",
+        "nama": "Reza Firmansyah",
+        "email": "reza.firman@gmail.com",
+        "kategori_karya": "lingkungan",
+        "deskripsi": "Konsep truk insinerator keliling pembakar limbah plastik rumah tangga langsung di lokasi pemukiman padat penduduk.",
+        "portofolio": "",
+        "status": "ditolak",
+        "catatan": "Metode insinerasi keliling berisiko tinggi menimbulkan polusi udara di pemukiman warga dan belum sesuai regulasi emisi DLH.",
+        "submitted_at": "2026-09-20T11:45:00+07:00",
+        "updated_at": "2026-09-21T10:30:00+07:00"
+    },
+    {
+        "id": "idea_005",
+        "nama": "Dewi Lestari",
+        "email": "dewi.lestari@foodbank.id",
+        "kategori_karya": "sosial & kemanusiaan",
+        "deskripsi": "Gerakan Food Rescue terorganisir yang menjemput makanan berlebih layak konsumsi dari hotel\/katering bintang lima dan menyalurkannya dalam 2 jam ke kantong-kantong keluarga prasejahtera.",
+        "portofolio": "https:\/\/dewilestari.my.id\/food-rescue",
+        "status": "menunggu",
+        "catatan": "",
+        "submitted_at": "2026-09-23T04:20:15+07:00",
+        "updated_at": null
+    },
+    {
+        "id": "idea_006",
+        "nama": "Fajar Nugraha",
+        "email": "fajar.nugraha@iot-indonesia.org",
+        "kategori_karya": "teknologi",
+        "deskripsi": "Sensor ketinggian air sungai bertenaga solar cell dengan transmisi data radio LoRaWAN berbiaya murah, memancarkan sirene darurat dan SMS blast ke warga bantaran sungai sebelum banjir kiriman tiba.",
+        "portofolio": "https:\/\/github.com\/fajarnugraha\/ciliwung-lora-alert",
+        "status": "diterima",
+        "catatan": "Prototipe sudah diuji coba di 2 titik dan berhasil. Memenuhi syarat pendanaan akselerasi.",
+        "submitted_at": "2026-09-19T16:05:30+07:00",
+        "updated_at": "2026-09-20T13:40:00+07:00"
+    },
+    {
+        "id": "idea_6ab391cc0681b3.81111038",
+        "nama": "Dinz",
+        "email": "dinz123@gmail.com",
+        "kategori_karya": "sosial",
+        "deskripsi": "adalahhdsdnsakdskd",
+        "portofolio": "dnwnewioweor",
+        "status": "ditolak",
+        "catatan": "",
+        "submitted_at": "2026-09-23T08:46:04+00:00",
+        "updated_at": "2026-09-23T08:51:11+00:00"
+    }
+]
