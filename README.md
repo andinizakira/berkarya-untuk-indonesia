@@ -1,15 +1,5 @@
 # 🇮🇩 Berkarya Untuk Indonesia — Web Development Platform
 
-<div align="center">
-
-![Next.js](https://img.shields.io/badge/Next.js-15-black?style=for-the-badge&logo=next.js)
-![React](https://img.shields.io/badge/React-19-blue?style=for-the-badge&logo=react)
-![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
-![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
-![PHP](https://img.shields.io/badge/PHP-REST_API-777BB4?style=for-the-badge&logo=php&logoColor=white)
-
-<br/>
-
 **Satu Ide. Satu Karya. Satu Dampak.**
 
 *Karya ini dikembangkan sebagai bagian dari **Creative Challenge — Mahreen Indonesia Internship Batch 2***  
