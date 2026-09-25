@@ -128,11 +128,3 @@ take-home-1x24jam/
 ## 👩‍💻 Profil Pengembang
 
 - **Nama:** Andini Zakira
-- **Program:** Mahreen Indonesia Internship Batch 2
-- **Posisi:** Web Development Frontend & Backend
-- **Tahun:** 2026/2027
-
----
-<div align="center">
-  <b>Berkarya Untuk Indonesia © 2024 — Mengubah Ide Jadi Dampak Nyata</b>
-</div>
